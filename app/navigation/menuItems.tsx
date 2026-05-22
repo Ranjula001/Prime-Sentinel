@@ -30,7 +30,7 @@ const MenuItems = ({ isOpen }: MenuItemsProps) => {
 
   return (
     <div
-      className={`fixed top-24 right-0 my-5 px-6 z-10 w-[420px] transition-all duration-500 ease-in-out ${
+      className={`fixed top-24 right-0 my-5 px-6 z-100 w-[420px] transition-all duration-500 ease-in-out ${
         isOpen
           ? 'opacity-100 translate-y-0 pointer-events-auto'
           : 'opacity-0 -translate-y-6 pointer-events-none'
