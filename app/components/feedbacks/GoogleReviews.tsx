@@ -57,12 +57,12 @@ const ReviewCard = ({ review }: { review: Review }) => {
   return (
     <article
       style={{
-        width: 290,
+        width: 260,
         flexShrink: 0,
         background: 'black',
         border: '1px solid #e5e7eb',
-        borderRadius: 16,
-        padding: 20,
+        borderRadius: 12,
+        padding: 16,
         boxSizing: 'border-box',
         transition: 'transform 0.2s, box-shadow 0.2s',
         cursor: 'default',
@@ -79,11 +79,11 @@ const ReviewCard = ({ review }: { review: Review }) => {
       <StarRating />
       <p
         style={{
-          fontSize: 13,
-          lineHeight: 1.7,
+          fontSize: 12,
+          lineHeight: 1.6,
           color: '#ffffff',
-          margin: '0 0 18px',
-          minHeight: 88,
+          margin: '0 0 14px',
+          minHeight: 72,
           display: '-webkit-box',
           WebkitLineClamp: 4,
           WebkitBoxOrient: 'vertical',
@@ -95,14 +95,14 @@ const ReviewCard = ({ review }: { review: Review }) => {
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <div
           style={{
-            width: 38,
-            height: 38,
+            width: 32,
+            height: 32,
             borderRadius: '50%',
             flexShrink: 0,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 13,
+            fontSize: 12,
             fontWeight: 600,
             background: av.bg,
             color: av.color,
@@ -110,14 +110,14 @@ const ReviewCard = ({ review }: { review: Review }) => {
           }}
         >
           {review.profile_photo_url ? (
-            <Image src={review.profile_photo_url} alt={review.author_name} width={38} height={38} style={{ objectFit: 'cover', borderRadius: '50%' }} />
+            <Image src={review.profile_photo_url} alt={review.author_name} width={32} height={32} style={{ objectFit: 'cover', borderRadius: '50%' }} />
           ) : (
             review.author_name.charAt(0)
           )}
         </div>
         <div>
-          <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: '#ffffff' }}>{review.author_name}</p>
-          <p style={{ margin: 0, fontSize: 12, color: '#9ca3af' }}>{review.role ?? 'Google Review'}</p>
+          <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: '#ffffff' }}>{review.author_name}</p>
+          <p style={{ margin: 0, fontSize: 11, color: '#9ca3af' }}>{review.role ?? 'Google Review'}</p>
         </div>
       </div>
     </article>
@@ -147,7 +147,7 @@ const GoogleReviews = () => {
   }, [data])
 
   return (
-    <section style={{ background: 'transparent', padding: '56px 0 64px', width: '100%' }}>
+    <section style={{ background: 'transparent', padding: '32px 0 40px', width: '100%' }}>
       <style>{`
         @keyframes reviewScrollFwd {
           from { transform: translateX(0); }
@@ -170,7 +170,7 @@ const GoogleReviews = () => {
           pointerEvents: 'none',
           position: 'absolute',
           left: 0, top: 0, bottom: 0,
-          width: 120,
+          width: 80,
           background: 'linear-gradient(to right, rgba(255,255,255,0.9), transparent)',
           zIndex: 2,
         }} />
@@ -179,14 +179,14 @@ const GoogleReviews = () => {
           pointerEvents: 'none',
           position: 'absolute',
           right: 0, top: 0, bottom: 0,
-          width: 120,
+          width: 80,
           background: 'linear-gradient(to left, rgba(255,255,255,0.9), transparent)',
           zIndex: 2,
         }} />
 
         <div
           className="review-row review-scroll-fwd"
-          style={{ display: 'flex', gap: 16, width: 'max-content' }}
+          style={{ display: 'flex', gap: 12, width: 'max-content' }}
         >
           {[...reviews, ...reviews, ...reviews].map((review, i) => (
             <ReviewCard key={`${review.author_name}-${i}`} review={review} />

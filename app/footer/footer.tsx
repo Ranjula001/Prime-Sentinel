@@ -219,12 +219,12 @@ const s = {
   },
   ctaBand: {
     borderBottom: '1px solid rgba(255,255,255,0.08)',
-    padding: '52px 48px 44px',
+    padding: '32px 24px 28px',
     display: 'flex',
     flexWrap: 'wrap' as const,
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    gap: 24,
+    gap: 20,
   },
   ctaLabel: {
     fontSize: 10,
@@ -235,7 +235,7 @@ const s = {
     margin: '0 0 10px',
   },
   ctaHeading: {
-    fontSize: 'clamp(28px, 4vw, 40px)',
+    fontSize: 'clamp(24px, 5vw, 40px)',
     fontWeight: 300,
     lineHeight: 1.15,
     letterSpacing: '-.02em',
@@ -272,10 +272,10 @@ const s = {
     textDecoration: 'none',
   },
   mainGrid: {
-    padding: '48px 48px 40px',
+    padding: '32px 24px 32px',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-    gap: 40,
+    gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+    gap: 28,
   },
   colLabel: {
     fontSize: 10,
@@ -317,7 +317,7 @@ const s = {
   },
   bottomBar: {
     borderTop: '1px solid rgba(255,255,255,0.08)',
-    padding: '16px 48px',
+    padding: '12px 24px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -325,7 +325,7 @@ const s = {
     gap: 8,
   },
   bottomText: {
-    fontSize: 11,
+    fontSize: 10,
     color: '#3f3f46',
     margin: 0,
   },
@@ -399,9 +399,9 @@ export default function Footer() {
               >
                 <div
                   style={{
-                    height: 42,
-                    width: 42,
-                    borderRadius: 10,
+                    height: 36,
+                    width: 36,
+                    borderRadius: 8,
                     background: 'rgba(251,191,36,0.1)',
                     border: '1px solid rgba(251,191,36,0.2)',
                     display: 'flex',
@@ -409,14 +409,14 @@ export default function Footer() {
                     justifyContent: 'center',
                     flexShrink: 0,
                     overflow: 'hidden',
-                    padding: 5,
+                    padding: 4,
                   }}
                 >
                   <Image
                     src="/PSLOGO.png"
                     alt="Prime Sentinel Insurance Solutions Logo"
-                    width={32}
-                    height={32}
+                    width={28}
+                    height={28}
                     priority={false}
                     style={{
                       width: '100%',
@@ -452,10 +452,10 @@ export default function Footer() {
 
               <p
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
                   color: '#71717a',
-                  lineHeight: 1.75,
-                  margin: '0 0 16px',
+                  lineHeight: 1.6,
+                  margin: '0 0 14px',
                 }}
               >
                 Independent guidance for business owners, families, and growing teams

@@ -235,7 +235,7 @@ const Home = () => {
       className={`${inter.className} min-h-screen w-full overflow-x-clip bg-[#e7e9e5] text-black`}
     >
       {/* HERO SECTION */}
-      <section className="relative flex h-[76svh] min-h-[560px] items-center overflow-hidden bg-[#e7e9e5] px-6 py-20 md:px-[6vw] lg:px-[110px]">
+      <section className="relative flex h-[76svh] min-h-[500px] md:min-h-[560px] items-center overflow-hidden bg-[#e7e9e5] px-4 md:px-6 py-16 md:py-20 md:px-[6vw] lg:px-[110px]">
         <motion.div
           initial={{ opacity: 0, scale: 0.7, rotate: -30 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -244,7 +244,7 @@ const Home = () => {
             duration: 1.1,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="pointer-events-none absolute -right-[120px] -top-[90px] h-[190px] w-[190px] rounded-full border-[18px] border-white/70 shadow-[inset_18px_18px_35px_rgba(0,0,0,0.08),20px_24px_50px_rgba(0,0,0,0.12)] md:-right-[70px] md:h-[23vw] md:w-[23vw] md:border-[2.5vw] lg:max-h-[430px] lg:max-w-[430px]"
+          className="pointer-events-none absolute -right-[60px] -top-[50px] h-[120px] w-[120px] rounded-full border-[12px] border-white/70 shadow-[inset_18px_18px_35px_rgba(0,0,0,0.08),20px_24px_50px_rgba(0,0,0,0.12)] md:-right-[70px] md:h-[23vw] md:w-[23vw] md:border-[2.5vw] lg:max-h-[430px] lg:max-w-[430px]"
         />
 
         <div className="relative z-10 w-full">
@@ -255,7 +255,7 @@ const Home = () => {
               duration: 0.9,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="m-0 text-[clamp(54px,17vw,120px)] font-light leading-[0.88] tracking-[-0.08em] text-black lg:text-[clamp(62px,11vw,120px)]"
+            className="m-0 text-[clamp(32px,12vw,80px)] md:text-[clamp(42px,14vw,100px)] lg:text-[clamp(54px,11vw,120px)] font-light leading-[0.88] tracking-[-0.08em] text-black"
           >
             Welcome To <span className="text-[#DAB001]">Prime Sentinel</span>{' '}
             Insurance Solutions
@@ -291,7 +291,7 @@ const Home = () => {
                 ease: 'easeInOut',
               },
             }}
-            className="m-0 bg-gradient-to-r from-black via-[#DAB001] to-black bg-[length:220%_100%] bg-clip-text text-[clamp(40px,10vw,92px)] font-light leading-[0.92] tracking-[-0.07em] text-transparent lg:ml-[26vw] lg:text-[clamp(40px,7vw,82px)] xl:ml-[520px]"
+            className="m-0 bg-gradient-to-r from-black via-[#DAB001] to-black bg-[length:220%_100%] bg-clip-text text-[clamp(24px,8vw,60px)] md:text-[clamp(32px,9vw,80px)] lg:text-[clamp(40px,7vw,92px)] font-light leading-[0.92] tracking-[-0.07em] text-transparent lg:ml-[20vw] xl:ml-[26vw] xl:text-[clamp(40px,7vw,82px)] xl:ml-[520px]"
           >
             Business. Property. Peace of Mind.
           </motion.h2>
@@ -303,11 +303,11 @@ const Home = () => {
               delay: 0.35,
               duration: 0.8,
             }}
-            className="mt-8 flex flex-col items-start gap-6 lg:ml-[27vw] lg:mt-[5vh] xl:ml-[535px]"
+            className="mt-6 md:mt-8 flex flex-col items-start gap-4 md:gap-6 lg:ml-[20vw] lg:mt-[5vh] xl:ml-[27vw] xl:mt-[5vh] xl:ml-[535px]"
           >
             <button
               onClick={scrollToSlider}
-              className="w-full max-w-[360px] rounded-lg border border-black/20 bg-black px-6 py-[15px] text-left text-xs font-semibold uppercase leading-[1.4] tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001] hover:text-[#071321] sm:w-auto sm:max-w-none"
+              className="w-full max-w-[280px] md:max-w-[320px] lg:max-w-[360px] rounded-lg border border-black/20 bg-black px-4 md:px-6 py-3 md:py-[15px] text-left text-[10px] md:text-xs font-semibold uppercase leading-[1.4] tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001] hover:text-[#071321] sm:w-auto sm:max-w-none"
             >
               Schedule your free coverage consultation
             </button>
@@ -321,7 +321,7 @@ const Home = () => {
             delay: 1,
             duration: 0.7,
           }}
-          className="absolute bottom-[34px] right-6 hidden flex-col items-center text-xs uppercase tracking-[0.18em] text-black/40 md:right-[4vw] md:flex lg:right-[70px]"
+          className="absolute bottom-[24px] right-4 md:right-6 hidden flex-col items-center text-[10px] md:text-xs uppercase tracking-[0.18em] text-black/40 md:right-[4vw] md:flex lg:right-[70px]"
         >
           <span>Scroll</span>
 
@@ -335,7 +335,7 @@ const Home = () => {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="mt-3 h-11 w-px origin-top bg-black/35"
+            className="mt-2 md:mt-3 h-8 md:h-11 w-px origin-top bg-black/35"
           />
         </motion.div>
       </section>
@@ -383,14 +383,14 @@ const Home = () => {
                 }}
                 transition={{ type: 'spring', stiffness: 80, damping: 24 }}
                 style={{ transformPerspective: 1800 }}
-                className="relative h-full w-full origin-center overflow-hidden bg-[#eef0f7] px-6 py-10 text-black shadow-[0_0_120px_rgba(0,0,0,0.35)] md:px-[6vw] lg:px-[80px] lg:py-12"
+                className="relative h-full w-full origin-center overflow-hidden bg-[#eef0f7] px-4 md:px-[6vw] py-8 md:py-10 lg:px-[80px] lg:py-12 text-black shadow-[0_0_120px_rgba(0,0,0,0.35)]"
               >
-                <div className="pointer-events-none absolute -left-[300px] top-[-180px] h-[720px] w-[720px] rounded-full border-[34px] border-[#DAB001] opacity-90 md:-left-[240px] lg:h-[820px] lg:w-[820px]" />
+                <div className="pointer-events-none absolute -left-[200px] top-[ -120px] h-[520px] w-[520px] rounded-full border-[24px] border-[#DAB001] opacity-90 md:-left-[240px] lg:h-[820px] lg:w-[820px]" />
 
-                <div className="relative z-10 grid h-full items-center gap-7 lg:grid-cols-[0.72fr_1fr] lg:gap-12">
+                <div className="relative z-10 grid h-full items-center gap-5 md:gap-7 lg:grid-cols-[0.72fr_1fr] lg:gap-12">
                   {/* VIDEO CARD */}
-                  <div className="relative mx-auto w-full max-w-[360px] overflow-hidden rounded-[28px] p-3 shadow-[0_35px_100px_rgba(110,88,0,0.35)] lg:max-w-[390px]">
-                    <div className="relative aspect-[9/16] max-h-[58vh] w-full overflow-hidden rounded-[20px] bg-black">
+                  <div className="relative mx-auto w-full max-w-[280px] md:max-w-[320px] lg:max-w-[390px] overflow-hidden rounded-[20px] md:rounded-[28px] p-2 md:p-3 shadow-[0_35px_100px_rgba(110,88,0,0.35)]">
+                    <div className="relative aspect-[9/16] max-h-[50vh] md:max-h-[58vh] w-full overflow-hidden rounded-[16px] md:rounded-[20px] bg-black">
                       <video
                         ref={videoRef}
                         src="/videos/prime-sentinel-reel.mp4"
@@ -407,7 +407,7 @@ const Home = () => {
                       {showPlayButton && (
                         <button
                           onClick={playVideoWithSound}
-                          className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white px-7 py-4 text-xs font-bold uppercase tracking-[0.14em] text-black shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-105 hover:bg-[#DAB001]"
+                          className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white px-5 md:px-7 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.14em] text-black shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-105 hover:bg-[#DAB001]"
                         >
                           Play With Sound
                         </button>
@@ -416,21 +416,21 @@ const Home = () => {
                   </div>
 
                   {/* CONTENT */}
-                  <div className="max-w-[780px]">
-                    <h2 className="text-[clamp(36px,6.5vw,96px)] font-light leading-[0.88] tracking-[-0.085em]">
+                  <div className="max-w-[100%] md:max-w-[780px]">
+                    <h2 className="text-[clamp(28px,5.5vw,72px)] md:text-[clamp(32px,6vw,84px)] font-light leading-[0.88] tracking-[-0.085em]">
                       Insurance
                       <br />
                       Guided With Clarity
                     </h2>
 
-                    <p className="mt-5 text-[clamp(17px,1.55vw,26px)] font-normal leading-[1.18] tracking-[-0.055em]">
+                    <p className="mt-4 md:mt-5 text-[clamp(14px,1.4vw,22px)] md:text-[clamp(16px,1.5vw,24px)] font-normal leading-[1.18] tracking-[-0.055em]">
                       Prime Sentinel Insurance Solutions is an independent
                       insurance brokerage built to help businesses and
                       individuals protect what matters most with clear guidance,
                       tailored coverage, and dependable support.
                     </p>
 
-                    <p className="mt-4 max-w-[700px] text-[clamp(13px,0.95vw,17px)] leading-[1.55] tracking-[-0.025em] text-black/65">
+                    <p className="mt-3 md:mt-4 max-w-[100%] md:max-w-[700px] text-[clamp(12px,0.9vw,15px)] md:text-[clamp(13px,0.95vw,17px)] leading-[1.55] tracking-[-0.025em] text-black/65">
                       Instead of forcing clients into one-size-fits-all
                       policies, Prime Sentinel focuses on understanding your
                       real risks first. From business owners and commercial
@@ -440,39 +440,39 @@ const Home = () => {
                       trust.
                     </p>
 
-                    <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-2xl border border-black/10 bg-white/55 p-4 backdrop-blur">
-                        <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#DAB001]">
+                    <div className="mt-4 md:mt-5 grid gap-2 md:gap-3 sm:grid-cols-3">
+                      <div className="rounded-xl md:rounded-2xl border border-black/10 bg-white/55 p-3 md:p-4 backdrop-blur">
+                        <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.14em] text-[#DAB001]">
                           Business
                         </h3>
-                        <p className="mt-2 text-xs leading-5 text-black/60">
+                        <p className="mt-1 md:mt-2 text-[10px] md:text-xs leading-4 md:leading-5 text-black/60">
                           Coverage guidance for owners, operators, franchises,
                           and growing companies.
                         </p>
                       </div>
 
-                      <div className="rounded-2xl border border-black/10 bg-white/55 p-4 backdrop-blur">
-                        <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#DAB001]">
+                      <div className="rounded-xl md:rounded-2xl border border-black/10 bg-white/55 p-3 md:p-4 backdrop-blur">
+                        <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.14em] text-[#DAB001]">
                           Property
                         </h3>
-                        <p className="mt-2 text-xs leading-5 text-black/60">
+                        <p className="mt-1 md:mt-2 text-[10px] md:text-xs leading-4 md:leading-5 text-black/60">
                           Protection for physical assets, commercial spaces, and
                           valuable property.
                         </p>
                       </div>
 
-                      <div className="rounded-2xl border border-black/10 bg-white/55 p-4 backdrop-blur">
-                        <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#DAB001]">
+                      <div className="rounded-xl md:rounded-2xl border border-black/10 bg-white/55 p-3 md:p-4 backdrop-blur">
+                        <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.14em] text-[#DAB001]">
                           Peace
                         </h3>
-                        <p className="mt-2 text-xs leading-5 text-black/60">
+                        <p className="mt-1 md:mt-2 text-[10px] md:text-xs leading-4 md:leading-5 text-black/60">
                           Transparent advice and ongoing client support.
                         </p>
                       </div>
                     </div>
 
-                    <button className="mt-5 inline-flex items-center gap-4 rounded-full bg-white px-7 py-4 text-xs font-bold uppercase tracking-[0.1em] text-black shadow-[0_35px_100px_rgba(110,88,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001]">
-                      <span className="h-2 w-2 rounded-full bg-black" />
+                    <button className="mt-4 md:mt-5 inline-flex items-center gap-3 md:gap-4 rounded-full bg-white px-5 md:px-7 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-black shadow-[0_35px_100px_rgba(110,88,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001]">
+                      <span className="h-1.5 md:h-2 w-1.5 md:w-2 rounded-full bg-black" />
                       Learn More About Us
                     </button>
                   </div>
@@ -492,16 +492,16 @@ const Home = () => {
       </section>
 
       {/* PRODUCTS PAGE CONTINUES AFTER HORIZONTAL STAGE */}
-      <section id='products' className="min-h-screen bg-[#e7e9e5] px-6 py-24 md:px-[6vw] lg:px-[110px]">
-        <h2 className="max-w-4xl text-[clamp(48px,8vw,120px)] font-light leading-[0.9] tracking-[-0.08em]">
+      <section id='products' className="min-h-screen bg-[#e7e9e5] px-4 md:px-6 py-16 md:py-24 md:px-[6vw] lg:px-[110px]">
+        <h2 className="max-w-4xl text-[clamp(36px,6vw,96px)] md:text-[clamp(42px,7vw,108px)] font-light leading-[0.9] tracking-[-0.08em]">
           Products Built Around Real Risk
         </h2>
         <ProductsGallery/>
       </section>
 
       {/* Clients Feedback */}
-      <section id='feedback' className="bg-[#e7e9e5] px-6 py-24 md:px-[6vw] lg:px-[110px]">
-        <h2 className="max-w-4xl text-[clamp(48px,8vw,120px)] font-light leading-[0.9] tracking-[-0.08em]">
+      <section id='feedback' className="bg-[#e7e9e5] px-4 md:px-6 py-16 md:py-24 md:px-[6vw] lg:px-[110px]">
+        <h2 className="max-w-4xl text-[clamp(36px,6vw,96px)] md:text-[clamp(42px,7vw,108px)] font-light leading-[0.9] tracking-[-0.08em]">
           What Our Clients Say
         </h2>
         <GoogleReviews />
