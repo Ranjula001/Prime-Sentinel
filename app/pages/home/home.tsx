@@ -1,5 +1,7 @@
 'use client'
 
+import ProductsGallery from '@/app/components/cards/ProductsGallery'
+import GoogleReviews from '@/app/components/feedbacks/GoogleReviews'
 import Slider from '@/app/components/imageSliders/slider'
 import { motion } from 'framer-motion'
 import { Inter } from 'next/font/google'
@@ -340,6 +342,7 @@ const Home = () => {
 
       {/* LOCKED HORIZONTAL 3D STAGE */}
       <section
+        id='slider'
         ref={stageRef}
         className="relative h-screen overflow-hidden bg-[#080808]"
       >
@@ -368,7 +371,7 @@ const Home = () => {
             </section>
 
             {/* ABOUT PANEL */}
-            <section className="relative h-screen w-screen shrink-0 overflow-hidden bg-[#eef0f7]">
+            <section id='whatisthis' className="relative h-screen w-screen shrink-0 overflow-hidden bg-[#eef0f7]">
               <motion.div
                 animate={{
                   y: aboutY,
@@ -415,7 +418,7 @@ const Home = () => {
                   {/* CONTENT */}
                   <div className="max-w-[780px]">
                     <h2 className="text-[clamp(36px,6.5vw,96px)] font-light leading-[0.88] tracking-[-0.085em]">
-                      Insurance,
+                      Insurance
                       <br />
                       Guided With Clarity
                     </h2>
@@ -468,7 +471,7 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <button className="mt-5 inline-flex items-center gap-4 rounded-full bg-white px-7 py-4 text-xs font-bold uppercase tracking-[0.1em] text-black shadow-[0_12px_35px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001]">
+                    <button className="mt-5 inline-flex items-center gap-4 rounded-full bg-white px-7 py-4 text-xs font-bold uppercase tracking-[0.1em] text-black shadow-[0_35px_100px_rgba(110,88,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001]">
                       <span className="h-2 w-2 rounded-full bg-black" />
                       Learn More About Us
                     </button>
@@ -488,16 +491,23 @@ const Home = () => {
         </div>
       </section>
 
-      {/* NORMAL PAGE CONTINUES AFTER HORIZONTAL STAGE */}
-      <section className="min-h-screen bg-[#e7e9e5] px-6 py-24 md:px-[6vw] lg:px-[110px]">
+      {/* PRODUCTS PAGE CONTINUES AFTER HORIZONTAL STAGE */}
+      <section id='products' className="min-h-screen bg-[#e7e9e5] px-6 py-24 md:px-[6vw] lg:px-[110px]">
         <h2 className="max-w-4xl text-[clamp(48px,8vw,120px)] font-light leading-[0.9] tracking-[-0.08em]">
-          Continue The Experience
+          Products Built Around Real Risk
         </h2>
+        <ProductsGallery/>
+      </section>
+
+      {/* Clients Feedback */}
+      <section id='feedback' className="bg-[#e7e9e5] px-6 py-24 md:px-[6vw] lg:px-[110px]">
+        <h2 className="max-w-4xl text-[clamp(48px,8vw,120px)] font-light leading-[0.9] tracking-[-0.08em]">
+          What Our Clients Say
+        </h2>
+        <GoogleReviews />
       </section>
     </main>
   )
 }
 
 export default Home
-
-
