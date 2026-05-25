@@ -20,7 +20,7 @@ type GooglePlaceResponse = {
   error_message?: string
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 21600
 
 export async function GET() {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY
@@ -47,11 +47,16 @@ export async function GET() {
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=${fields}&reviews_sort=newest&key=${apiKey}`
 
   try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 5000)
+
     const response = await fetch(url, {
+      signal: controller.signal,
       next: {
-        revalidate: 60 * 60 * 6,
+        revalidate: 21600,
+        tags: ['google-reviews'],
       },
-    })
+    }).finally(() => clearTimeout(timeout))
 
     const data = (await response.json()) as GooglePlaceResponse
 
@@ -65,13 +70,20 @@ export async function GET() {
       )
     }
 
-    return NextResponse.json({
-      name: data.result?.name ?? 'Prime Sentinel Insurance',
-      rating: data.result?.rating ?? 5,
-      totalReviews: data.result?.user_ratings_total ?? 0,
-      googleUrl: data.result?.url ?? process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL,
-      reviews: data.result?.reviews ?? [],
-    })
+    return NextResponse.json(
+      {
+        name: data.result?.name ?? 'Prime Sentinel Insurance',
+        rating: data.result?.rating ?? 5,
+        totalReviews: data.result?.user_ratings_total ?? 0,
+        googleUrl: data.result?.url ?? process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL,
+        reviews: data.result?.reviews ?? [],
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=21600, stale-while-revalidate=86400',
+        },
+      }
+    )
   } catch {
     return NextResponse.json(
       {

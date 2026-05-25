@@ -12,10 +12,11 @@ import MenuItem from './itemButton'
  ──────────────────────────────────────────────────────────────────── */
 const NAV_LINKS = [
   { label: 'HOME',     href: '/'          },
-  { label: 'ABOUT US', href: '/#slider'   },
+  { label: 'ABOUT US', href: '/aboutUs'   },
   { label: 'PRODUCTS', href: '/#products' },
+  { label: 'FINANCING',  href: '/financing' },
+  { label: 'CAREERS',  href: '/careers' },
   { label: 'REVIEWS',  href: '/#feedback' },
-  { label: 'CONTACT',  href: '/contact'   },
 ]
 
 type MenuItemsProps = {

@@ -260,7 +260,7 @@ export default function ContactPage() {
 
           {/* ── HERO ─────────────────────────────────────────────── */}
           <section className="cp-hero">
-            <Image src="/Footer.png" alt="Contact Prime Sentinel Insurance" fill priority
+            <Image src="/Footer.png" alt="Contact Prime Sentinel Insurance" fill priority sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center' }} className="cp-hero-img" />
             <div className="cp-hero-ov1" />
             <div className="cp-hero-ov2" />

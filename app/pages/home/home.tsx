@@ -5,7 +5,7 @@ import GoogleReviews from '@/app/components/feedbacks/GoogleReviews'
 import Slider from '@/app/components/imageSliders/slider'
 import { motion } from 'framer-motion'
 import { Inter } from 'next/font/google'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,11 +28,11 @@ const Home = () => {
     return Math.min(Math.max(value, min), max)
   }
 
-  const setProgress = (value: number) => {
-    const next = clamp(value, 0, 1)
+  const setProgress = useCallback((value: number) => {
+    const next = Math.min(Math.max(value, 0), 1)
     progressRef.current = next
     setHorizontalProgress(next)
-  }
+  }, [])
 
   const scrollToSlider = () => {
     const stage = stageRef.current
@@ -186,7 +186,7 @@ const Home = () => {
       window.removeEventListener('wheel', handleWheel)
       window.removeEventListener('scroll', keepStagePinned)
     }
-  }, [])
+  }, [setProgress])
 
   useEffect(() => {
     const video = videoRef.current
@@ -210,8 +210,10 @@ const Home = () => {
     if (horizontalProgress < 0.9 && videoStarted) {
       video.pause()
       video.currentTime = 0
-      setVideoStarted(false)
-      setShowPlayButton(false)
+      window.requestAnimationFrame(() => {
+        setVideoStarted(false)
+        setShowPlayButton(false)
+      })
     }
   }, [horizontalProgress, videoStarted])
 
@@ -397,6 +399,7 @@ const Home = () => {
                         className="h-full w-full object-cover"
                         loop
                         playsInline
+                        preload="metadata"
                         controls
                       >
                         Your browser does not support the video tag.

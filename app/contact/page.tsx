@@ -77,6 +77,7 @@ function Reveal({ children, delay = 0, dx = 0 }: { children: React.ReactNode; de
 }
 
 /* ── Contact info data ─────────────────────────────────────────── */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const contactDetails = [
   {
     icon: <MapPinIcon />,
@@ -301,7 +302,7 @@ export default function ContactPage() {
 
           {/* ── HERO ─────────────────────────────────────────────── */}
           <section className="cp-hero">
-            <Image src="/Footer.png" alt="Contact Prime Sentinel Insurance" fill priority
+            <Image src="/Footer.png" alt="Contact Prime Sentinel Insurance" fill priority sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center' }} className="cp-hero-img" />
             <div className="cp-hero-ov1" />
             <div className="cp-hero-ov2" />

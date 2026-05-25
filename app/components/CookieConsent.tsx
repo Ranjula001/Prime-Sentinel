@@ -4,14 +4,11 @@ import React, { useState, useEffect } from 'react'
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false)
-  const [hasConsented, setHasConsented] = useState(false)
 
   useEffect(() => {
     // Check if user has already made a choice
     const consent = localStorage.getItem('cookieConsent')
-    if (consent === 'accepted' || consent === 'denied') {
-      setHasConsented(true)
-    } else {
+    if (consent !== 'accepted' && consent !== 'denied' && consent !== 'customized') {
       // Show banner after a short delay for new visitors
       const timer = setTimeout(() => {
         setIsVisible(true)
@@ -22,24 +19,21 @@ const CookieConsent = () => {
 
   const handleAccept = () => {
     localStorage.setItem('cookieConsent', 'accepted')
-    setHasConsented(true)
     setIsVisible(false)
   }
 
   const handleDeny = () => {
     localStorage.setItem('cookieConsent', 'denied')
-    setHasConsented(true)
     setIsVisible(false)
   }
 
   const handleCustomize = () => {
     // For now, just accept - you can expand this to show a modal with detailed options
     localStorage.setItem('cookieConsent', 'customized')
-    setHasConsented(true)
     setIsVisible(false)
   }
 
-  if (!isVisible || hasConsented) {
+  if (!isVisible) {
     return null
   }
 

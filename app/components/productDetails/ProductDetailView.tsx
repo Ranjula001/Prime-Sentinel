@@ -358,6 +358,7 @@ export default function ProductDetailView({ product, catalog }: Props) {
             alt={product.title}
             fill
             priority
+            sizes="100vw"
             className="psi-hero-img"
             style={{ objectFit: 'cover' }}
           />
@@ -420,7 +421,7 @@ export default function ProductDetailView({ product, catalog }: Props) {
         {/* ── Coverage Highlights ────────────────────────────────── */}
         <section id="coverage" className="psi-section" style={{ paddingTop: 0 }}>
           <Reveal>
-            <div className="psi-section-tag">What's included</div>
+            <div className="psi-section-tag">What&apos;s included</div>
             <h2 className="psi-section-title" style={{ marginBottom: 48 }}>
               Key coverage <em>highlights</em>
             </h2>
@@ -497,6 +498,7 @@ export default function ProductDetailView({ product, catalog }: Props) {
                 src={product.image}
                 alt={product.title}
                 fill
+                sizes="(max-width: 900px) 100vw, 50vw"
                 className="psi-cta-img"
                 style={{ objectFit: 'cover' }}
               />

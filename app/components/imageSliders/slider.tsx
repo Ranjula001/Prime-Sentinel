@@ -64,14 +64,12 @@ const slides = [
 export default function Slider() {
   const [items, setItems] = useState(slides);
   const [animating, setAnimating] = useState(false);
-  const [direction, setDirection] = useState<"next" | "prev" | null>(null);
   const [contentKey, setContentKey] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const go = (dir: "next" | "prev") => {
     if (animating) return;
     setAnimating(true);
-    setDirection(dir);
     setContentKey((k) => k + 1);
 
     timeoutRef.current = setTimeout(() => {
@@ -87,7 +85,6 @@ export default function Slider() {
         return arr;
       });
       setAnimating(false);
-      setDirection(null);
     }, 500);
   };
 
@@ -95,7 +92,6 @@ export default function Slider() {
     if (animating || targetIndex === 1) return;
     const offset = targetIndex - 1;
     setAnimating(true);
-    setDirection(offset > 0 ? "next" : "prev");
     setContentKey((k) => k + 1);
 
     timeoutRef.current = setTimeout(() => {
@@ -113,7 +109,6 @@ export default function Slider() {
         return arr;
       });
       setAnimating(false);
-      setDirection(null);
     }, 500);
   };
 

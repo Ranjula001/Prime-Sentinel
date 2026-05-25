@@ -1,6 +1,7 @@
 'use client'
 
 import { products } from '@/app/data/products'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
@@ -8,7 +9,6 @@ const ProductsGallery = () => {
   const [rotation, setRotation] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
-  const [activeSlug, setActiveSlug] = useState(products[0]?.slug)
 
   const frameRef = useRef<number | null>(null)
   const lastTimeRef = useRef<number | null>(null)
@@ -163,9 +163,6 @@ const ProductsGallery = () => {
     })
   }, [rotation])
 
-  const activeProduct =
-    products.find((item) => item.slug === activeSlug) ?? products[0]
-
   return (
     <section
       className="relative mt-8 md:mt-12 min-h-[500px] md:min-h-[680px] lg:min-h-[740px] select-none overflow-hidden rounded-[24px] md:rounded-[38px] bg-[#070707] px-4 md:px-6 lg:px-16 py-10 md:py-16 text-white"
@@ -208,8 +205,6 @@ const ProductsGallery = () => {
             }) => (
               <div
                 key={product.slug}
-                onMouseEnter={() => setActiveSlug(product.slug)}
-                onPointerDown={() => setActiveSlug(product.slug)}
                 className="absolute left-1/2 top-1/2 h-[280px] w-[200px] md:h-[360px] md:w-[260px] select-none"
                 style={{
                   zIndex,
@@ -243,9 +238,11 @@ const ProductsGallery = () => {
                   className="group block h-full w-full cursor-pointer select-none"
                 >
                   <div className="relative h-full w-full select-none overflow-hidden rounded-[20px] md:rounded-[28px] border border-white/10 bg-[#111] shadow-[0_35px_90px_rgba(0,0,0,0.55)] transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[#DAB001]/70">
-                    <img
+                    <Image
                       src={product.image}
                       alt={product.title}
+                      fill
+                      sizes="(max-width: 768px) 78vw, (max-width: 1200px) 34vw, 24vw"
                       className="pointer-events-none h-full w-full select-none object-cover transition-transform duration-700 group-hover:scale-110"
                       draggable={false}
                     />
