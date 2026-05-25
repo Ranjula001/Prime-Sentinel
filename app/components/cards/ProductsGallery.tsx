@@ -7,6 +7,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 const ProductsGallery = () => {
   const [mounted, setMounted] = useState(false)
+  const [isCompact, setIsCompact] = useState(false)
   const [rotation, setRotation] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
@@ -30,7 +31,17 @@ const ProductsGallery = () => {
   }, [])
 
   useEffect(() => {
-    if (!mounted) return
+    const query = window.matchMedia('(max-width: 767px)')
+    const updateCompact = () => setIsCompact(query.matches)
+
+    updateCompact()
+    query.addEventListener('change', updateCompact)
+
+    return () => query.removeEventListener('change', updateCompact)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted || isCompact) return
 
     const animate = (time: number) => {
       if (lastTimeRef.current === null) {
@@ -55,7 +66,7 @@ const ProductsGallery = () => {
         cancelAnimationFrame(frameRef.current)
       }
     }
-  }, [mounted, isPaused, isDragging])
+  }, [mounted, isCompact, isPaused, isDragging])
 
   useEffect(() => {
     if (!isDragging) return
@@ -173,6 +184,58 @@ const ProductsGallery = () => {
       }
     })
   }, [rotation])
+
+  if (isCompact) {
+    return (
+      <section className="relative mt-8 overflow-hidden rounded-[24px] bg-[#070707] px-4 py-8 text-white">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(218,176,1,0.22),transparent_34%)]" />
+        <div className="relative z-10 mb-5">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#DAB001]">
+            Coverage options
+          </p>
+          <h3 className="mt-2 text-2xl font-light leading-none tracking-[-0.06em]">
+            Swipe to explore
+          </h3>
+        </div>
+
+        <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {products.map((product) => (
+            <Link
+              key={product.slug}
+              href={`/products/${product.slug}`}
+              className="group relative h-[360px] w-[78vw] max-w-[310px] shrink-0 snap-center overflow-hidden rounded-[22px] border border-white/10 bg-[#111] shadow-[0_24px_60px_rgba(0,0,0,0.45)]"
+            >
+              <Image
+                src={product.image}
+                alt={product.title}
+                fill
+                sizes="78vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+              <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/70 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.16em] text-white/80">
+                {product.category}
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#DAB001]">
+                  {product.shortTitle}
+                </p>
+                <h4 className="mt-2 text-2xl font-medium leading-none tracking-[-0.05em] text-white">
+                  {product.title}
+                </h4>
+                <p className="mt-3 line-clamp-3 text-sm leading-5 text-white/70">
+                  {product.summary}
+                </p>
+                <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-[0.12em] text-black">
+                  View Details <span>→</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section

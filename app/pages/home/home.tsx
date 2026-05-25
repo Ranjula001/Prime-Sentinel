@@ -20,6 +20,7 @@ const Home = () => {
   const [horizontalProgress, setHorizontalProgress] = useState(0)
   const [showPlayButton, setShowPlayButton] = useState(false)
   const [videoStarted, setVideoStarted] = useState(false)
+  const [isMobileLayout, setIsMobileLayout] = useState(false)
 
   const progressRef = useRef(0)
   const lockedRef = useRef(false)
@@ -97,6 +98,18 @@ const Home = () => {
   }
 
   useEffect(() => {
+    const query = window.matchMedia('(max-width: 767px)')
+    const updateLayout = () => setIsMobileLayout(query.matches)
+
+    updateLayout()
+    query.addEventListener('change', updateLayout)
+
+    return () => query.removeEventListener('change', updateLayout)
+  }, [])
+
+  useEffect(() => {
+    if (isMobileLayout) return
+
     const handleWheel = (event: WheelEvent) => {
       const stage = stageRef.current
       if (!stage) return
@@ -187,7 +200,7 @@ const Home = () => {
       window.removeEventListener('wheel', handleWheel)
       window.removeEventListener('scroll', keepStagePinned)
     }
-  }, [setProgress])
+  }, [isMobileLayout, setProgress])
 
   useEffect(() => {
     const video = videoRef.current
@@ -218,20 +231,20 @@ const Home = () => {
     }
   }, [horizontalProgress, videoStarted])
 
-  const trackX = `${-horizontalProgress * 100}vw`
+  const trackX = isMobileLayout ? '0px' : `${-horizontalProgress * 100}vw`
 
-  const sliderScale = 1 - horizontalProgress * 0.14
-  const sliderRotateY = -18 * horizontalProgress
-  const sliderRotateX = -8 * horizontalProgress
-  const sliderOpacity = 1 - horizontalProgress * 0.75
-  const sliderBlur = `blur(${horizontalProgress * 10}px)`
+  const sliderScale = isMobileLayout ? 1 : 1 - horizontalProgress * 0.14
+  const sliderRotateY = isMobileLayout ? 0 : -18 * horizontalProgress
+  const sliderRotateX = isMobileLayout ? 0 : -8 * horizontalProgress
+  const sliderOpacity = isMobileLayout ? 1 : 1 - horizontalProgress * 0.75
+  const sliderBlur = isMobileLayout ? 'none' : `blur(${horizontalProgress * 10}px)`
 
-  const aboutScale = 0.84 + horizontalProgress * 0.16
-  const aboutRotateY = 28 - horizontalProgress * 28
-  const aboutRotateX = 10 - horizontalProgress * 10
-  const aboutOpacity = clamp((horizontalProgress - 0.2) / 0.35, 0, 1)
-  const aboutY = 80 - horizontalProgress * 80
-  const aboutRadius = 44 - horizontalProgress * 44
+  const aboutScale = isMobileLayout ? 1 : 0.84 + horizontalProgress * 0.16
+  const aboutRotateY = isMobileLayout ? 0 : 28 - horizontalProgress * 28
+  const aboutRotateX = isMobileLayout ? 0 : 10 - horizontalProgress * 10
+  const aboutOpacity = isMobileLayout ? 1 : clamp((horizontalProgress - 0.2) / 0.35, 0, 1)
+  const aboutY = isMobileLayout ? 0 : 80 - horizontalProgress * 80
+  const aboutRadius = isMobileLayout ? 0 : 44 - horizontalProgress * 44
 
   return (
     <main
@@ -347,16 +360,16 @@ const Home = () => {
       <section
         id='slider'
         ref={stageRef}
-        className="relative h-screen overflow-hidden bg-[#080808]"
+        className="relative h-auto overflow-hidden bg-[#080808] md:h-screen"
       >
-        <div className="relative h-screen overflow-hidden [perspective:1800px]">
+        <div className="relative h-auto overflow-hidden md:h-screen md:[perspective:1800px]">
           <motion.div
             animate={{ x: trackX }}
             transition={{ type: 'spring', stiffness: 80, damping: 24 }}
-            className="flex h-screen w-[200vw]"
+            className="flex h-auto w-full flex-col md:h-screen md:w-[200vw] md:flex-row"
           >
             {/* SLIDER PANEL */}
-            <section className="relative h-screen w-screen shrink-0 overflow-hidden bg-[#080808]">
+            <section className="relative h-[100svh] min-h-[560px] w-full shrink-0 overflow-hidden bg-[#080808] md:h-screen md:w-screen">
               <motion.div
                 animate={{
                   scale: sliderScale,
@@ -374,7 +387,7 @@ const Home = () => {
             </section>
 
             {/* ABOUT PANEL */}
-            <section id='whatisthis' className="relative h-screen w-screen shrink-0 overflow-hidden bg-[#eef0f7]">
+            <section id='whatisthis' className="relative min-h-[100svh] w-full shrink-0 overflow-hidden bg-[#eef0f7] md:h-screen md:w-screen">
               <motion.div
                 animate={{
                   y: aboutY,
@@ -386,11 +399,11 @@ const Home = () => {
                 }}
                 transition={{ type: 'spring', stiffness: 80, damping: 24 }}
                 style={{ transformPerspective: 1800 }}
-                className="relative h-full w-full origin-center overflow-y-auto md:overflow-hidden bg-[#eef0f7] px-4 md:px-[6vw] py-6 md:py-10 lg:px-[80px] lg:py-12 text-black shadow-[0_0_120px_rgba(0,0,0,0.35)]"
+                className="relative min-h-[100svh] w-full origin-center overflow-y-visible bg-[#eef0f7] px-4 py-8 text-black shadow-[0_0_120px_rgba(0,0,0,0.35)] md:h-full md:overflow-hidden md:px-[6vw] md:py-10 lg:px-[80px] lg:py-12"
               >
                 <div className="pointer-events-none absolute -left-[200px] top-[ -120px] h-[520px] w-[520px] rounded-full border-[24px] border-[#DAB001] opacity-90 md:-left-[240px] lg:h-[820px] lg:w-[820px]" />
 
-                <div className="relative z-10 grid min-h-full content-start items-start gap-4 md:h-full md:content-center md:items-center md:gap-7 lg:grid-cols-[0.72fr_1fr] lg:gap-12">
+                <div className="relative z-10 grid min-h-full content-start items-start gap-5 md:h-full md:content-center md:items-center md:gap-7 lg:grid-cols-[0.72fr_1fr] lg:gap-12">
                   {/* VIDEO CARD */}
                   <div className="relative mx-auto w-full max-w-[190px] sm:max-w-[230px] md:max-w-[320px] lg:max-w-[390px] overflow-hidden rounded-[20px] md:rounded-[28px] p-2 md:p-3 shadow-[0_35px_100px_rgba(110,88,0,0.35)]">
                     <div className="relative aspect-[9/16] max-h-[34svh] sm:max-h-[38svh] md:max-h-[58vh] w-full overflow-hidden rounded-[16px] md:rounded-[20px] bg-black">
@@ -485,7 +498,7 @@ const Home = () => {
             </section>
           </motion.div>
 
-          <div className="pointer-events-none absolute bottom-5 left-1/2 z-50 h-[2px] w-[240px] -translate-x-1/2 overflow-hidden rounded-full bg-white/20">
+          <div className="pointer-events-none absolute bottom-5 left-1/2 z-50 hidden h-[2px] w-[240px] -translate-x-1/2 overflow-hidden rounded-full bg-white/20 md:block">
             <motion.div
               animate={{ width: `${horizontalProgress * 100}%` }}
               transition={{ type: 'spring', stiffness: 80, damping: 24 }}

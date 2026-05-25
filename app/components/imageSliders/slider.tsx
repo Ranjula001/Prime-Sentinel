@@ -522,14 +522,39 @@ export default function Slider() {
         }
 
         @media (max-width: 600px) {
+          .ps-hero {
+            min-height: 560px;
+          }
           .ps-content {
-            left: 24px;
-            right: 24px;
+            left: 20px;
+            right: 20px;
             max-width: 100%;
+          }
+          .ps-headline {
+            font-size: clamp(36px, 12vw, 52px);
+            line-height: 0.98;
+          }
+          .ps-desc {
+            max-width: 310px;
+            font-size: 15px;
+            line-height: 1.45;
+            margin-bottom: 24px;
+          }
+          .ps-btn-group {
+            align-items: stretch;
+            flex-direction: column;
+            max-width: 290px;
+          }
+          .ps-cta,
+          .ps-cta-ghost {
+            width: 100%;
+            padding: 13px 18px;
+            text-align: center;
           }
           .ps-controls {
             left: 50%;
             transform: translateX(-50%);
+            bottom: 20px;
           }
         }
       `}</style>
