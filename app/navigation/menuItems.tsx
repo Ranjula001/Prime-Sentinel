@@ -96,7 +96,7 @@ const MenuItems = ({ isOpen, onClose }: MenuItemsProps) => {
 
   return (
     <div
-      className={`fixed top-16 md:top-20 lg:top-24 right-0 my-3 md:my-5 px-4 md:px-6 z-100 w-[90vw] md:w-[380px] lg:w-[420px] transition-all duration-500 ease-in-out ${
+      className={`fixed right-0 top-14 z-[100] my-2 max-h-[calc(100svh-4.5rem)] w-[calc(100vw-1rem)] max-w-[360px] overflow-y-auto px-2 transition-all duration-500 ease-in-out sm:top-16 sm:my-3 sm:px-4 md:top-20 md:my-5 md:w-[380px] md:max-w-none md:px-6 lg:top-24 lg:w-[420px] ${
         isOpen
           ? 'opacity-100 translate-y-0 pointer-events-auto'
           : 'opacity-0 -translate-y-6 pointer-events-none'
