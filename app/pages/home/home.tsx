@@ -5,6 +5,7 @@ import GoogleReviews from '@/app/components/feedbacks/GoogleReviews'
 import Slider from '@/app/components/imageSliders/slider'
 import { motion } from 'framer-motion'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 const inter = Inter({
@@ -385,14 +386,14 @@ const Home = () => {
                 }}
                 transition={{ type: 'spring', stiffness: 80, damping: 24 }}
                 style={{ transformPerspective: 1800 }}
-                className="relative h-full w-full origin-center overflow-hidden bg-[#eef0f7] px-4 md:px-[6vw] py-8 md:py-10 lg:px-[80px] lg:py-12 text-black shadow-[0_0_120px_rgba(0,0,0,0.35)]"
+                className="relative h-full w-full origin-center overflow-y-auto md:overflow-hidden bg-[#eef0f7] px-4 md:px-[6vw] py-6 md:py-10 lg:px-[80px] lg:py-12 text-black shadow-[0_0_120px_rgba(0,0,0,0.35)]"
               >
                 <div className="pointer-events-none absolute -left-[200px] top-[ -120px] h-[520px] w-[520px] rounded-full border-[24px] border-[#DAB001] opacity-90 md:-left-[240px] lg:h-[820px] lg:w-[820px]" />
 
-                <div className="relative z-10 grid h-full items-center gap-5 md:gap-7 lg:grid-cols-[0.72fr_1fr] lg:gap-12">
+                <div className="relative z-10 grid min-h-full content-start items-start gap-4 md:h-full md:content-center md:items-center md:gap-7 lg:grid-cols-[0.72fr_1fr] lg:gap-12">
                   {/* VIDEO CARD */}
-                  <div className="relative mx-auto w-full max-w-[280px] md:max-w-[320px] lg:max-w-[390px] overflow-hidden rounded-[20px] md:rounded-[28px] p-2 md:p-3 shadow-[0_35px_100px_rgba(110,88,0,0.35)]">
-                    <div className="relative aspect-[9/16] max-h-[50vh] md:max-h-[58vh] w-full overflow-hidden rounded-[16px] md:rounded-[20px] bg-black">
+                  <div className="relative mx-auto w-full max-w-[190px] sm:max-w-[230px] md:max-w-[320px] lg:max-w-[390px] overflow-hidden rounded-[20px] md:rounded-[28px] p-2 md:p-3 shadow-[0_35px_100px_rgba(110,88,0,0.35)]">
+                    <div className="relative aspect-[9/16] max-h-[34svh] sm:max-h-[38svh] md:max-h-[58vh] w-full overflow-hidden rounded-[16px] md:rounded-[20px] bg-black">
                       <video
                         ref={videoRef}
                         src="/videos/prime-sentinel-reel.mp4"
@@ -419,7 +420,7 @@ const Home = () => {
                   </div>
 
                   {/* CONTENT */}
-                  <div className="max-w-[100%] md:max-w-[780px]">
+                  <div className="max-w-[100%] pb-8 md:max-w-[780px] md:pb-0">
                     <h2 className="text-[clamp(28px,5.5vw,72px)] md:text-[clamp(32px,6vw,84px)] font-light leading-[0.88] tracking-[-0.085em]">
                       Insurance
                       <br />
@@ -474,10 +475,10 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <button className="mt-4 md:mt-5 inline-flex items-center gap-3 md:gap-4 rounded-full bg-white px-5 md:px-7 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-black shadow-[0_35px_100px_rgba(110,88,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001]">
+                    <Link href="/aboutUs" className="mt-4 md:mt-5 inline-flex items-center gap-3 md:gap-4 rounded-full bg-white px-5 md:px-7 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] text-black shadow-[0_35px_100px_rgba(110,88,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#DAB001]">
                       <span className="h-1.5 md:h-2 w-1.5 md:w-2 rounded-full bg-black" />
                       Learn More About Us
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

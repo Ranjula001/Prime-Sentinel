@@ -29,6 +29,7 @@ const MenuItems = ({ isOpen, onClose }: MenuItemsProps) => {
   const pathname = usePathname()
 
   const [email, setEmail] = useState('')
+  const [newsletterMessage, setNewsletterMessage] = useState('')
 
   /* Determines whether a link is "active" based on current route */
   const isActive = (href: string) => {
@@ -72,10 +73,24 @@ const MenuItems = ({ isOpen, onClose }: MenuItemsProps) => {
     router.push(href)
   }
 
-  const handleNewsletterSubmit = () => {
-    if (!email) return
-    // Wire to your newsletter service here
-    console.log('Newsletter signup:', email)
+  const handleNewsletterSubmit = (event?: React.FormEvent) => {
+    event?.preventDefault()
+
+    const normalizedEmail = email.trim()
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
+
+    if (!isValidEmail) {
+      setNewsletterMessage('Enter a valid email address.')
+      return
+    }
+
+    const subject = encodeURIComponent('Newsletter subscription request')
+    const body = encodeURIComponent(
+      `Please subscribe this email address to the Prime Sentinel newsletter:\n\n${normalizedEmail}`
+    )
+
+    window.location.href = `mailto:info@sentinelinsurance.agency?subject=${subject}&body=${body}`
+    setNewsletterMessage('Opening your email app...')
     setEmail('')
   }
 
@@ -104,22 +119,31 @@ const MenuItems = ({ isOpen, onClose }: MenuItemsProps) => {
         <p className="font-[var(--font-inter)] text-xl md:text-2xl lg:text-3xl font-semibold mb-4 md:mb-6 leading-tight">
           Subscribe to<br />our newsletter
         </p>
-        <div className="bg-gray-100 rounded-xl md:rounded-2xl flex items-center px-4 md:px-6 py-3 md:py-4 gap-3 md:gap-4">
+        <form onSubmit={handleNewsletterSubmit} className="bg-gray-100 rounded-xl md:rounded-2xl flex items-center px-4 md:px-6 py-3 md:py-4 gap-3 md:gap-4">
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleNewsletterSubmit()}
+            onChange={(e) => {
+              setEmail(e.target.value)
+              if (newsletterMessage) setNewsletterMessage('')
+            }}
             placeholder="Your email"
-            className="bg-transparent flex-1 font-[var(--font-inter)] text-sm md:text-base lg:text-lg outline-none text-gray-400 placeholder-gray-400"
+            aria-label="Newsletter email"
+            className="bg-transparent min-w-0 flex-1 font-[var(--font-inter)] text-sm md:text-base lg:text-lg outline-none text-gray-700 placeholder-gray-400"
           />
           <button
-            onClick={handleNewsletterSubmit}
+            type="submit"
+            aria-label="Subscribe to newsletter"
             className="text-xl md:text-2xl hover:translate-x-1 transition-transform duration-200 cursor-pointer"
           >
             →
           </button>
-        </div>
+        </form>
+        {newsletterMessage && (
+          <p className="mt-2 px-1 font-[var(--font-inter)] text-xs text-gray-500">
+            {newsletterMessage}
+          </p>
+        )}
       </div>
 
       {/* ── Contact Us bar ── */}
