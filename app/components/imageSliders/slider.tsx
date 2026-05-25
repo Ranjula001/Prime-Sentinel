@@ -4,20 +4,20 @@ import { useEffect, useRef, useState } from "react";
 
 const slides = [
   {
-    image: "/Trucks.webp",
-    tag: "Commercial & Trucking",
-    headline: "Keep Your Fleet\nMoving Forward",
+    image: "/Yatch.webp",
+    tag: "Specialty Liability",
+    headline: "Luxury Assets\nDeserve Elite Cover",
     description:
-      "Tailored insurance for independent truckers and large fleets — compliance guaranteed, assets protected.",
-    cta: "Get Trucking Coverage",
+      "Professional liability, EPLI, and umbrella policies crafted for high-value assets and discerning clients.",
+    cta: "Discover Specialty Plans",
   },
   {
-    image: "/Porsche.webp",
-    tag: "Commercial Auto",
-    headline: "Protect Every\nVehicle You Own",
+    image: "/Life.webp",
+    tag: "Personal Lines",
+    headline: "Guard What\nMatters Most",
     description:
-      "From single-vehicle operators to multi-car commercial fleets, we find the right coverage across 30+ carriers.",
-    cta: "Explore Auto Plans",
+      "Auto, home, and umbrella coverage for individuals and families — securing your world beyond business.",
+    cta: "Explore Personal Plans",
   },
   {
     image: "/House.webp",
@@ -28,12 +28,20 @@ const slides = [
     cta: "Build Your BOP",
   },
   {
-    image: "/Yatch.webp",
-    tag: "Specialty Liability",
-    headline: "Luxury Assets\nDeserve Elite Cover",
+    image: "/Porsche.webp",
+    tag: "Commercial Auto",
+    headline: "Protect Every\nVehicle You Own",
     description:
-      "Professional liability, EPLI, and umbrella policies crafted for high-value assets and discerning clients.",
-    cta: "Discover Specialty Plans",
+      "From single-vehicle operators to multi-car commercial fleets, we find the right coverage across 30+ carriers.",
+    cta: "Explore Auto Plans",
+  },
+    {
+    image: "/Trucks.webp",
+    tag: "Commercial & Trucking",
+    headline: "Keep Your Fleet\nMoving Forward",
+    description:
+      "Tailored insurance for independent truckers and large fleets — compliance guaranteed, assets protected.",
+    cta: "Get Trucking Coverage",
   },
   {
     image: "/7Eleven.webp",
@@ -51,27 +59,17 @@ const slides = [
       "Comprehensive coverage solutions for franchise operators, retail chains, and growing enterprises.",
     cta: "Get a Custom Quote",
   },
-  {
-    image: "/Life.webp",
-    tag: "Personal Lines",
-    headline: "Guard What\nMatters Most",
-    description:
-      "Auto, home, and umbrella coverage for individuals and families — securing your world beyond business.",
-    cta: "Explore Personal Plans",
-  },
 ];
 
 export default function Slider() {
   const [items, setItems] = useState(slides);
   const [animating, setAnimating] = useState(false);
-  const [direction, setDirection] = useState<"next" | "prev" | null>(null);
   const [contentKey, setContentKey] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const go = (dir: "next" | "prev") => {
     if (animating) return;
     setAnimating(true);
-    setDirection(dir);
     setContentKey((k) => k + 1);
 
     timeoutRef.current = setTimeout(() => {
@@ -87,7 +85,30 @@ export default function Slider() {
         return arr;
       });
       setAnimating(false);
-      setDirection(null);
+    }, 500);
+  };
+
+  const goToSlide = (targetIndex: number) => {
+    if (animating || targetIndex === 1) return;
+    const offset = targetIndex - 1;
+    setAnimating(true);
+    setContentKey((k) => k + 1);
+
+    timeoutRef.current = setTimeout(() => {
+      setItems((prev) => {
+        const arr = [...prev];
+        for (let i = 0; i < Math.abs(offset); i += 1) {
+          if (offset > 0) {
+            const first = arr.shift()!;
+            arr.push(first);
+          } else {
+            const last = arr.pop()!;
+            arr.unshift(last);
+          }
+        }
+        return arr;
+      });
+      setAnimating(false);
     }, 500);
   };
 
@@ -187,6 +208,21 @@ export default function Slider() {
         .ps-item:nth-child(4),
         .ps-item:nth-child(5) {
           box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+          opacity: 0.65;
+          cursor: pointer;
+          transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .ps-item:nth-child(n+6) {
+          opacity: 0.35;
+          cursor: pointer;
+          transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .ps-item:nth-child(n+3):hover {
+          transform: translateY(-50%) scale(1.04);
+          opacity: 1;
+          z-index: 4;
         }
 
         /* ── HERO CONTENT ── */
@@ -230,9 +266,9 @@ export default function Slider() {
         }
 
         .ps-headline {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Inter', sans-serif;
           font-size: clamp(52px, 7vw, 96px);
-          font-weight: 700;
+          font-weight: 400;
           line-height: 1.0;
           color: var(--cream);
           white-space: pre-line;
@@ -324,7 +360,7 @@ export default function Slider() {
         }
 
         .ps-thumb-tag {
-          font-size: 9px;
+          font-size: 13px;
           font-weight: 600;
           letter-spacing: 0.2em;
           text-transform: uppercase;
@@ -333,9 +369,9 @@ export default function Slider() {
         }
 
         .ps-thumb-name {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Inter', sans-serif;
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 300;
           color: var(--cream);
           line-height: 1.2;
         }
@@ -500,9 +536,9 @@ export default function Slider() {
 
       <section className="ps-hero">
         {/* Header */}
-        <header className="ps-header mt-20">
+        {/* <header className="ps-header mt-20">
           <span className="ps-badge">30+ Carrier Network</span>
-        </header>
+        </header> */}
 
         {/* Slide Track */}
         <div className="ps-slide">
@@ -511,6 +547,7 @@ export default function Slider() {
               key={`${slide.image}-${i}`}
               className="ps-item"
               style={{ backgroundImage: `url(${slide.image})` }}
+              onClick={() => goToSlide(i)}
             >
               {/* Hero content (only shown on slot 2) */}
               <div className="ps-content" key={`content-${contentKey}-${i}`}>
@@ -526,9 +563,9 @@ export default function Slider() {
               {/* Thumbnail label (slots 3+) */}
               <div className="ps-thumb-label">
                 <div className="ps-thumb-tag">{slide.tag}</div>
-                <div className="ps-thumb-name">
+                {/* <div className="ps-thumb-name">
                   {slide.headline.split("\n")[0]}
-                </div>
+                </div> */}
               </div>
             </div>
           ))}
@@ -549,11 +586,10 @@ export default function Slider() {
             disabled={animating}
             aria-label="Previous slide"
           >
-            ←
+            ◀
           </button>
           <span className="ps-slide-count">
-            {String(items.indexOf(activeSlide) + 1).padStart(2, "0")} /{" "}
-            {String(slides.length).padStart(2, "0")}
+            {String((slides.findIndex((s) => s.image === activeSlide.image) )).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
           </span>
           <button
             className="ps-nav-btn next"
@@ -561,7 +597,7 @@ export default function Slider() {
             disabled={animating}
             aria-label="Next slide"
           >
-            →
+            ▶
           </button>
         </div>
       </section>

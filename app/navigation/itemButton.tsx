@@ -11,7 +11,7 @@ const MenuItem = ({ label, active, onClick }: MenuItemProps) => {
 
   return (
     <div
-      className={`flex items-center justify-between py-4 px-4 rounded-2xl cursor-pointer transition-all duration-300 group ${
+      className={`flex items-center justify-between py-3 md:py-4 px-3 md:px-4 rounded-xl md:rounded-2xl cursor-pointer transition-all duration-300 group ${
         isHovered ? 'bg-gray-100' : 'bg-transparent'
       }`}
       onClick={onClick}
@@ -22,7 +22,7 @@ const MenuItem = ({ label, active, onClick }: MenuItemProps) => {
       <div className="overflow-hidden h-[1.3em] flex items-center">
         {/* Default — rolls up and out */}
         <span
-          className={`font-inter text-2xl uppercase tracking-tight transition-all duration-300 ease-in-out block ${
+          className={`font-inter text-lg md:text-xl lg:text-2xl uppercase tracking-tight transition-all duration-300 ease-in-out block ${
             isHovered ? '-translate-y-full opacity-0 absolute' : 'translate-y-0 opacity-100'
           }`}
         >
@@ -30,7 +30,7 @@ const MenuItem = ({ label, active, onClick }: MenuItemProps) => {
         </span>
         {/* Hover — rolls up and in */}
         <span
-          className={`font-inter text-2xl uppercase tracking-tight transition-all duration-300 ease-in-out block ${
+          className={`font-inter text-lg md:text-xl lg:text-2xl uppercase tracking-tight transition-all duration-300 ease-in-out block ${
             isHovered ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 absolute'
           }`}
         >
@@ -39,10 +39,10 @@ const MenuItem = ({ label, active, onClick }: MenuItemProps) => {
       </div>
 
       {/* Right side indicator */}
-      <div className="relative w-6 h-6 flex items-center justify-center">
+      <div className="relative w-5 h-5 md:w-6 md:h-6 flex items-center justify-center">
         {/* Bullet — visible when active */}
         <span
-          className={`absolute transition-all duration-300 ease-in-out text-lg ${
+          className={`absolute transition-all duration-300 ease-in-out text-base md:text-lg ${
             active && !isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
           }`}
         >
@@ -50,7 +50,7 @@ const MenuItem = ({ label, active, onClick }: MenuItemProps) => {
         </span>
         {/* Arrow — visible on hover */}
         <span
-          className={`absolute transition-all duration-300 ease-in-out text-xl ${
+          className={`absolute transition-all duration-300 ease-in-out text-lg md:text-xl ${
             isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
           }`}
         >
