@@ -6,6 +6,7 @@ import Link from 'next/link'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 const ProductsGallery = () => {
+  const [mounted, setMounted] = useState(false)
   const [rotation, setRotation] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
@@ -21,6 +22,16 @@ const ProductsGallery = () => {
   const dragMovedRef = useRef(false)
 
   useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setMounted(true)
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     const animate = (time: number) => {
       if (lastTimeRef.current === null) {
         lastTimeRef.current = time
@@ -44,7 +55,7 @@ const ProductsGallery = () => {
         cancelAnimationFrame(frameRef.current)
       }
     }
-  }, [isPaused, isDragging])
+  }, [mounted, isPaused, isDragging])
 
   useEffect(() => {
     if (!isDragging) return
@@ -191,7 +202,7 @@ const ProductsGallery = () => {
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] md:h-[500px] w-[600px] md:w-[940px] -translate-x-1/2 -translate-y-1/2 rounded-t-full border-t border-[#DAB001]/30 opacity-80" />
 
         <div className="absolute inset-0 overflow-visible select-none">
-          {cards.map(
+          {mounted && cards.map(
             ({
               product,
               x,
