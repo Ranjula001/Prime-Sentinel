@@ -13,6 +13,11 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Prime Sentinel Insurance",
   description: "...",
+  icons: {
+    icon: "/PSLOGO.png",
+    shortcut: "/PSLOGO.png",
+    apple: "/PSLOGO.png",
+  },
 };
 
 export default function RootLayout({
